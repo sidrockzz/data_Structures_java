@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class array_rot {
+    static int gcd(int a, int b){
+        if(b==0) return a;
+        else return gcd(b,a%b);
+    }
     public static void main(String [] args){
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -13,15 +17,22 @@ public class array_rot {
             int s = sc.nextInt();
             ar.add(s);
         }
-        for(int i=0;i<d;i++){
-            int j,temp;
-            temp = ar.get(0);
-            for(j=0;j<n-1;j++){
-                ar.set(j,ar.get(j+1));
+        d = d%n;
+        int i,j,k,temp;
+        int gcd = gcd(d,n);
+        for(i=0;i<gcd;i++){
+            temp = ar.get(i);
+            j=i;
+            while (true){
+                k = j+d;
+                if(k>=n) k = k-n;
+                if(k==i) break;
+                ar.set(j,ar.get(k));
+                j=k;
             }
-            ar.set(n-1,temp);
+            ar.set(j,temp);
         }
-        for(int i=0;i<n;i++){
+        for(i=0;i<n;i++){
             System.out.print(ar.get(i) + " ");
         }
     }
