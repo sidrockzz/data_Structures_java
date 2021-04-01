@@ -11,6 +11,7 @@ public class LinkedList_Singly {
             System.out.print(n.data+" ");
             n = n.next;
         }
+        System.out.println();
     }
     //Inserts a new node at front of the list
     public void push(int data){
@@ -68,6 +69,9 @@ public class LinkedList_Singly {
         Node next = temp.next.next;
         temp.next=next;
     }
+    public void deletelist(){
+        head = null;
+    }
     public static void main(String [] args){
         LinkedList_Singly l = new LinkedList_Singly();
         l.append(6);
@@ -80,5 +84,7 @@ public class LinkedList_Singly {
         l.print();
         l.deleteNodePos(2);
         l.print();
+        l.deletelist();
+        System.out.println("Linked list is deleted");
     }
 }
