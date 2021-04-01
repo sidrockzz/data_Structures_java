@@ -18,6 +18,16 @@ public class LinkedList_Singly {
         new_node.next = head;
         head = new_node;
     }
+    // inserts a new node after the prev given node
+    public void insertAfter(Node node, int data){
+        if(node == null){
+            System.out.println("The previous node mst not be null");
+            return;
+        }
+        Node new_node = new Node(data);
+        new_node.next = node.next;
+        node.next = new_node;
+    }
     public static void main(String [] args){
         LinkedList_Singly l = new LinkedList_Singly();
         l.head = new Node(1);
