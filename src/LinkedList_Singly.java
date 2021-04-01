@@ -40,13 +40,27 @@ public class LinkedList_Singly {
         while(last.next!= null) last = last.next;
         last.next = new_node;
     }
+    public void deleteNode(int key){
+        Node temp = head,prev = null;
+        if(temp!=null && temp.data==key){
+            head = temp.next;
+            return;
+        }
+        while(temp!=null && temp.data!=key){
+            prev = temp;
+            temp=temp.next;
+        }
+        if(temp==null)
+            return;
+        prev.next = temp.next;
+    }
     public static void main(String [] args){
         LinkedList_Singly l = new LinkedList_Singly();
-        l.head = new Node(1);
-        Node second = new Node(2);
-        Node third = new Node(3);
-        l.head.next = second;
-        second.next = third;
+        l.append(6);
+        l.push(7);
+        l.push(8);
+        l.append(9);
+        l.insertAfter(l.head.next.next,10);
         l.print();
     }
 }
