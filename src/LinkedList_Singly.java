@@ -12,6 +12,12 @@ public class LinkedList_Singly {
             n = n.next;
         }
     }
+    //Inserts a new node at front of the list
+    public void push(int data){
+        Node new_node = new Node(data);
+        new_node.next = head;
+        head = new_node;
+    }
     public static void main(String [] args){
         LinkedList_Singly l = new LinkedList_Singly();
         l.head = new Node(1);
