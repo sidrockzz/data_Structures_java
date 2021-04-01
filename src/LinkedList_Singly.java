@@ -28,6 +28,18 @@ public class LinkedList_Singly {
         new_node.next = node.next;
         node.next = new_node;
     }
+    //Appends a new node at the end
+    public void append(int data){
+        Node new_node = new Node(data);
+        if(head==null){
+            head = new Node(data);
+            return;
+        }
+        new_node.next = null;
+        Node last = head;
+        while(last.next!= null) last = last.next;
+        last.next = new_node;
+    }
     public static void main(String [] args){
         LinkedList_Singly l = new LinkedList_Singly();
         l.head = new Node(1);
