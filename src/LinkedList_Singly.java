@@ -54,6 +54,20 @@ public class LinkedList_Singly {
             return;
         prev.next = temp.next;
     }
+    public void deleteNodePos(int pos){
+        if(head == null) return;
+        Node temp = head;
+        if(pos ==0){
+            head = temp.next;
+            return;
+        }
+        for(int i=0;temp!=null && i<pos-1;i++)
+            temp = temp.next;
+        if(temp==null|| temp.next== null)
+            return;
+        Node next = temp.next.next;
+        temp.next=next;
+    }
     public static void main(String [] args){
         LinkedList_Singly l = new LinkedList_Singly();
         l.append(6);
@@ -61,6 +75,10 @@ public class LinkedList_Singly {
         l.push(8);
         l.append(9);
         l.insertAfter(l.head.next.next,10);
+        l.print();
+        l.deleteNode(9);
+        l.print();
+        l.deleteNodePos(2);
         l.print();
     }
 }
