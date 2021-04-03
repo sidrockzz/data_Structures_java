@@ -49,6 +49,37 @@ public class binary_tree {
     public boolean find(int value){
         return findR(root,value);
     }
+    private Node deleteR(Node current,int value){
+        if(current == null) return null;
+        if(value == current.value){
+            if (current.left == null && current.right == null) {
+                return null;
+            }
+            if (current.right == null) {
+                return current.left;
+            }
+
+            if (current.left == null) {
+                return current.right;
+            }
+            int smallestValue = findSmallestValue(current.right);
+            current.value = smallestValue;
+            current.right = deleteR(current.right, smallestValue);
+            return current;
+        }
+        if(value<current.value){
+            current.left = deleteR(current.left,value);
+            return current;
+        }
+        current.right = deleteR(current.right,value);
+        return current;
+    }
+    public void delete(int value) {
+        root = deleteR(root, value);
+    }
+    private int findSmallestValue(Node root) {
+        return root.left == null ? root.value : findSmallestValue(root.left);
+    }
     public static void main(String [] args){
         binary_tree bt = new binary_tree();
         bt.add(10);
@@ -62,5 +93,8 @@ public class binary_tree {
         bt.postorder(root);
         System.out.println(bt.find(11));
         System.out.println(bt.find(23));
+        bt.delete(10);
+        bt.delete(13);
+        bt.inorder(root);
     }
 }
