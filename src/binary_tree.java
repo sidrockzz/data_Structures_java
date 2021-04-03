@@ -40,6 +40,15 @@ public class binary_tree {
         preorder(current.left);
         preorder(current.right);
     }
+    private boolean findR(Node current, int value){
+        if(current==null) return false;
+        if( value == current.value) return true;
+        return value<current.value ? findR(current.left,value)
+                :findR(current.right,value);
+    }
+    public boolean find(int value){
+        return findR(root,value);
+    }
     public static void main(String [] args){
         binary_tree bt = new binary_tree();
         bt.add(10);
@@ -51,5 +60,7 @@ public class binary_tree {
         bt.preorder(root);
         System.out.println();
         bt.postorder(root);
+        System.out.println(bt.find(11));
+        System.out.println(bt.find(23));
     }
 }
