@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 class Node{
     int value;
     Node right;
@@ -80,6 +83,17 @@ public class binary_tree {
     private int findSmallestValue(Node root) {
         return root.left == null ? root.value : findSmallestValue(root.left);
     }
+    public void bfs(){
+        if(root == null) return;
+        Queue<Node> nodes = new LinkedList<>();
+        nodes.add(root);
+        while(!nodes.isEmpty()){
+            Node node = nodes.remove();
+            System.out.print(node.value+" ");
+            if(node.left!=null) nodes.add(node.left);
+            if(node.right!=null) nodes.add(node.right);
+        }
+    }
     public static void main(String [] args){
         binary_tree bt = new binary_tree();
         bt.add(10);
@@ -91,6 +105,9 @@ public class binary_tree {
         bt.preorder(root);
         System.out.println();
         bt.postorder(root);
+        System.out.println();
+        bt.bfs();
+        System.out.println();
         System.out.println(bt.find(11));
         System.out.println(bt.find(23));
         bt.delete(10);
