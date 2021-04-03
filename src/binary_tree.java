@@ -1,68 +1,55 @@
-import java.util.LinkedList;
-import java.util.Queue;
-
+class Node{
+    int value;
+    Node right;
+    Node left;
+    Node(int value){
+        this.value = value;
+        left = null;
+        right = null;
+    }
+}
 public class binary_tree {
-    static class Node{
-        int key;
-        Node left,right;
-        Node(int key){
-            this.key = key;
-            left=null;
-            right = null;
-        }
-    }
     static Node root;
-    static Node temp = root;
-    static void inorder(Node temp){
-        if(temp == null) return;
-        inorder(temp.left);
-        System.out.print(temp.key+" ");
-        inorder(temp.right);
-    }
-    static void postorder(Node temp){
-        if(temp==null) return;
-        postorder(temp.left);
-        postorder(temp.right);
-        System.out.print(temp.key+" ");
-    }
-    static void preorder(Node temp){
-        if(temp==null) return;
-        System.out.print(temp.key+" ");
-        preorder(temp.left);
-        preorder(temp.right);
-    }
-    static void insert(Node temp,int key){
-        if(temp == null){
-            root = new Node(key);
-            return;
+    private Node addR(Node current,int value){
+        if(current == null){
+            return new Node(value);
         }
-        Queue<Node> q = new LinkedList<>();
-        q.add(temp);
-        while(!q.isEmpty()){
-            temp=q.peek();
-            q.remove();
-            if(temp.left==null){
-                temp.left = new Node(key);
-                break;
-            }
-            else q.add(temp.left);
-            if(temp.right==null){
-                temp.right = new Node(key);
-                break;
-            }
-            else q.add(temp.right);
-        }
+        if(value< current.value) current.left = addR(current.left,value);
+        else if(value> current.value) current.right = addR(current.right,value);
+        else return current;
+        return current;
+    }
+    public void add(int value){
+        root = addR(root, value);
+    }
+    public void inorder(Node current){
+        if(current == null) return;
+        inorder(current.left);
+        System.out.print(current.value+" ");
+        inorder(current.right);
+    }
+    public void postorder(Node current){
+        if(current == null) return;
+        postorder(current.left);
+        postorder(current.right);
+        System.out.print(current.value+" ");
+    }
+    public void preorder(Node current){
+        if(current == null) return;
+        System.out.print(current.value+" ");
+        preorder(current.left);
+        preorder(current.right);
     }
     public static void main(String [] args){
-        root = new Node(10);
-        insert(root,11);
-        insert(root,12);
-        insert(root,13);
-        insert(root,14);
-        inorder(root);
+        binary_tree bt = new binary_tree();
+        bt.add(10);
+        bt.add(11);
+        bt.add(12);
+        bt.add(13);
+        bt.inorder(root);
         System.out.println();
-        preorder(root);
+        bt.preorder(root);
         System.out.println();
-        postorder(root);
+        bt.postorder(root);
     }
 }
