@@ -3,7 +3,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class array_sort_rotate_pair_sum {
-    //O(n)
     static int pair(List<Integer> a,int n , int x){
         int i;
         for(i=0;i<n-1;i++)
